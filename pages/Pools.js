@@ -1,7 +1,7 @@
 import React from "react";
 
 const Pools = () => {
-  return <div>Pools</div>;
+  return <div></div>;
 };
 
 export default Pools;

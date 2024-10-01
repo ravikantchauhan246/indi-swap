@@ -1,7 +1,7 @@
 import React from "react";
 
 const Tokens = () => {
-  return <div>Tokens</div>;
+  return <div></div>;
 };
 
 export default Tokens;

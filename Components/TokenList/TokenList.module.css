@@ -15,7 +15,7 @@
     padding: .2rem 1rem;
     font-weight: 900;
     line-height: 1.2; /* Changed from 0 to improve readability */
-    color: #cff80b;
+    color: #F5F6FC;
     font-size: .8rem;
     border-radius: .5rem;
 }
@@ -31,7 +31,7 @@
 .TokenList_box{
     position: relative;
     cursor: pointer;
-    border-bottom: 1px solid #d1f80b53;
+    border-bottom: 1px solid #ffffffc0;
 }
 
 .TokenList_box_info{
@@ -47,7 +47,7 @@
 }
 
 .TokenList_box_info_symbol{
-    background-color: #cff80b;
+    background-color: #F5F6FC;
     padding: .5rem;
     border-radius: .5rem;
     color: #1e1e1e;
