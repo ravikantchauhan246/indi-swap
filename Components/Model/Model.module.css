@@ -11,7 +11,8 @@
 }
 
 .Model_box{
-    background-color: #1e1e1e;
+    background-color: #1F242E;
+    border: #1e1e1e 3px solid;
     padding: 2rem;
     border-radius: .5rem;
 
@@ -30,7 +31,7 @@
     background-color: #F5F6FC;
     padding: 1rem;
     border-radius: .5rem;
-    color: #1e1e1e;
+    color: #1F242E;
     font-weight: 700;
     cursor: pointer;
 }
