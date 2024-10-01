@@ -39,6 +39,7 @@ const NavBar = () => {
           <div className={Style.NavBar_box_left_menu}>
             {menuItems.map((el, i) => (
               <Link
+                style={{ textDecoration: "none" }}
                 key={i + 1}
                 href={{ pathname: `${el.name}`, query: `${el.link}` }}
               >
@@ -66,7 +67,7 @@ const NavBar = () => {
                 </div>
                 <p>Network Name</p>
             </div>
-            <button onClick={()=>{}}>Address</button>
+            <button onClick={()=>setOpenModel(true)}>Address</button>
             {openModel && (
                 <Model setOpenModel={setOpenModel}  connectWallet = "Connect"/>
             )}
