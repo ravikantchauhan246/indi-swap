@@ -41,3 +41,7 @@
     border:1px solid #cff80b;
     border-radius: .5rem;
 }
+
+.Model_box_heading_img{
+    cursor: pointer;
+}

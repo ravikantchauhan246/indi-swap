@@ -18,8 +18,8 @@ const Model = ({ setOpenModel, connectWallet }) => {
             <Image
               src={images.close}
               alt="close"
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               onClick={() => setOpenModel(false)}
             />
           </div>

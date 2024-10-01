@@ -1,0 +1,87 @@
+.TokenList{
+    position: absolute;
+    width: 20rem; /* Keep original width */
+    max-width: 90%; /* Limit width on smaller screens */
+    border-radius: .5rem;
+    background-color: #1e1e1e;
+    margin-top: 2rem;
+    right: 1rem; /* Position to the right */
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.TokenList_title{
+    width: 100%;
+    padding: .2rem 1rem;
+    font-weight: 900;
+    line-height: 1.2; /* Changed from 0 to improve readability */
+    color: #cff80b;
+    font-size: .8rem;
+    border-radius: .5rem;
+}
+
+.TokenList_close{
+    position: absolute;
+    right: 0.5rem; /* Adjusted position */
+    cursor: pointer;
+    top: 0.5rem; /* Adjusted position */
+    z-index: 1111111;
+}
+
+.TokenList_box{
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px solid #d1f80b53;
+}
+
+.TokenList_box_info{
+    display: flex; /* Changed from grid to flex for better responsiveness */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    align-items: center;
+    gap: 1rem;
+}
+
+.TokenList_box_info p{
+    flex: 1; /* Allow text to grow and shrink */
+    min-width: 60%; /* Ensure text takes up most of the space on small screens */
+}
+
+.TokenList_box_info_symbol{
+    background-color: #cff80b;
+    padding: .5rem;
+    border-radius: .5rem;
+    color: #1e1e1e;
+    font-weight: 700;
+
+}
+
+/* Add media queries for different screen sizes */
+@media (max-width: 768px) {
+    .TokenList {
+        width: 18rem; /* Slightly smaller on medium screens */
+        margin-top: 1rem;
+        right: 0.5rem; /* Closer to the edge on smaller screens */
+    }
+
+    .TokenList_title {
+        font-size: 0.7rem;
+    }
+
+    .TokenList_box_info {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .TokenList {
+        width: 16rem; /* Even smaller on very small screens */
+        padding: 0.5rem;
+        right: 0.25rem; /* Very close to the edge on smallest screens */
+    }
+
+    .TokenList_box_info_symbol {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+}
+
