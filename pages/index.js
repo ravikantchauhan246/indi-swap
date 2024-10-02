@@ -1,7 +1,16 @@
-import React from "react";
+import React, {useState,useContext,useEffect} from "react";
+
+//Internal Import
+
+import {HeroSection} from "../Components/index"
+
 
 const Home = () => {
-  return <div></div>;
+  return(
+    <div>
+      <HeroSection accounts = "hey" tokenData="Data"/>
+    </div>
+  )
 };
 
 export default Home;
