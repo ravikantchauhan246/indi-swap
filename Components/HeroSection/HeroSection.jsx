@@ -72,8 +72,8 @@ const HeroSection = ({ accounts, tokenData }) => {
         </div>
         {accounts ? (<button className={Style.HeroSection_box_btn}>Connect Wallet</button>):(<button className={Style.HeroSection_box_btn} onClick={()=>{}}>Swap</button>)}
       </div>
-      {openSetting &&  <Token openSetting={setOpenToken} />}
-      {openToken && (<SearchToken openToken={openToken} 
+      {openSetting &&  <Token setOpenSetting={setOpenSetting} />}
+      {openToken && (<SearchToken openToken={setOpenToken} 
       tokens={setTokenOne}
       tokenData={tokenData}/>)}
 
