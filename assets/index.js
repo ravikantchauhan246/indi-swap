@@ -14,7 +14,7 @@ import arrowLeft from "./leftarrow.png";
 import tick from "./tick.png";
 import loading from "./loading.gif";
 
-export default {
+const images = {
   indiswap,
   search,
   ether,
@@ -31,3 +31,5 @@ export default {
   tick,
   loading,
 };
+
+export default images;
