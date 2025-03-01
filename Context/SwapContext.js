@@ -23,12 +23,12 @@ import {
 // import { connectingWithPoolContract } from "../Utils/deployPool";
 
 import { IWETHABI } from "./constants";
-
+import ERC20 from "./ERC20.json";
 
 export const SwapTokenContext = React.createContext();
 
 export const SwapTokenContextProvider = ({ children }) => {
-  const swap = "welcome to swap my token"
+  const swap = "welcome to swap my token";
 
   //USSTATE
   const [account, setAccount] = useState("");
@@ -46,73 +46,134 @@ export const SwapTokenContextProvider = ({ children }) => {
     "0xC1dC7a8379885676a6Ea08E67b7Defd9a235De71",
     "0xf0F5e9b00b92f3999021fD8B88aC75c351D93fc7",
     "0xCC9676b9bf25cE45a3a5F88205239aFdDeCF1BC7",
-  ];
+  ].filter(address => ethers.utils.isAddress(address));
 
   const fetchAccountData = async () => {
     try {
+      const userAccount = await checkIfWalletConnected();
+      setAccount(userAccount);
+  
       const web3modal = new Web3Modal();
       const connection = await web3modal.connect();
       const provider = new ethers.providers.Web3Provider(connection);
-      const signer = provider.getSigner();
-
-      // Get the user's account address
-      const userAccount = await signer.getAddress();
-      setAccount(userAccount);
-
-      // Fetch the balance
+  
+      // Fetch account details
+  
       const balance = await provider.getBalance(userAccount);
-      const balanceInEth = ethers.utils.formatEther(balance);
-      setEther(balanceInEth);
+      console.log("SWeekar",balance);
+      
+  const ethValue=ethers.utils.formatEther(balance);
+      
+  setEther(ethValue);
+  
+  // Fetch network details
+  
+  const networkDetailsResponse=await provider.getNetwork();
+  
+  setNetworkConnect(networkDetailsResponse.name);
+  
+  
+  // Fetch all tokens' balances
+  
+  
+  let fetchedTokens=[];
+  
+  for(let i=0;i<addToken.length;i++){
+    
+  try{
+    
+  let el=addToken[i];
+  
+  let currentContract=new ethers.Contract(el , ERC20.abi ,provider)
+  
+  console.log(currentContract,"contract created")
+  
+  let fetchedUserBalance=(await currentContract.balanceOf(userAccount).catch((err)=>{
+    console.error(`Error fetching balance for token ${el}:`, err);
+    return BigNumber.from(0)
+  }))
+  
+  if(fetchedUserBalance.toString()==="0"){
+    console.log(`Skipping token ${el} due to zero balance.`);
+  }else{
+  console.log(`Non-zero balance found for token ${el}.`);
+  }
+  
+  fetchedUserBalance=fetchedUserBalance.toString()
+  
+  // Convert balance to ether format if needed
+  const convertBal=fetchedUserBalance;
+  
+  const symbol=(await currentContract.symbol().catch((err)=>{
+    console.error(`Error fetching symbol for token ${el}:`, err);
+    return 'unknown';
+  }));
+  
+  const name=(await currentContract.name().catch((err)=>{
+    console.error(`Error fetching name for token ${el}:`, err);
+    return 'unknown';
+  }));
+  
+  console.log("Fetched details:",name,symbol,fetchedUserBalance)
+  
+  if(fetchedUserBalance !== "0"){
+  fetchedTokens.push({
+  name:name ,
+  symbol:symbol ,
+  tokenBalance:convertBal ,
+  tokenAddress:currentContract.address ,
+  
+  })
+  }else{
+  console.log("Not adding token due to zero balance.");
+  }
+  
+  }
+    
+  
+  catch(e){
+  console.warn('Unexpected Error Occured',e)
+  }
+  
+  }
+  
+  if(fetchedTokens.length === 0){
+  console.warn("No non-zero balances found among specified tokens.");
+  }else{
+  console.log("Successfully fetched non-zero balances:", fetchedTokens);
+  }
+  
+  setTokenData(fetchedTokens)
 
-      console.log("Account:", userAccount);
-      console.log("Balance:", balanceInEth);
-
-      // 获取网络信息
-      const network = await provider.getNetwork();
-      console.log(network);
-      setNetworkConnect(network.name);
-
-      // 获取所有代币余额和数据
-      addToken.map(async (el, i) => {
-        // 获取代币合约
-        const contract = new ethers.Contract(el, ERC20, provider);
-        // 获取代币余额
-        const userBalance = await contract.balanceOf(userAccount);
-        const tokenLeft = BigNumber.from(userBalance).toString();
-        const convertTokenBal = ethers.utils.formatEther(tokenLeft);
-
-        // 获取代币名称和符号
-        const symbol = await contract.symbol();
-        const name = await contract.name();
-
-        // 将代币数据推入 tokenData 数组
-        tokenData.push({
-          name: name,
-          symbol: symbol,
-          tokenBalance: convertTokenBal,
-          tokenAddress: el,
-        });
-      });
-
-    } catch (error) {
-      console.error("Error fetching account data:", error);
-    }
+  
+  
+  } catch (error) {
+  
+  if(error instanceof ReferenceError){
+  console.error("Reference Error:",error.message,"at line",error.lineNumber)
+  }else{
+  console.warn('fetching account data failed',error)
+  }
+  }
   };
+  
 
   useEffect(() => {
     fetchAccountData();
   }, []);
 
   return (
-    <SwapTokenContext.Provider value={{
-    swap,
-    account,
-    ether,
-    networkConnect,
-    tokenData,
-    topTokensList
-    }}>
+    <SwapTokenContext.Provider
+      value={{
+        swap,
+        account,
+        ether,
+        networkConnect,
+        tokenData,
+        topTokensList,
+      }}
+    >
       {children}
     </SwapTokenContext.Provider>
-  )
-}
+  );
+};
