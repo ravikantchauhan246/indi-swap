@@ -1,12 +1,8 @@
-# Building and Deploying a Uniswap Exchange Clone for DeFi
+# Building and Deploying a IndiSwap Exchange Clone for DeFi
 
 Enter the world of decentralized finance (DeFi) with our Uniswap Exchange clone, UniClone. This project focuses on replicating the functionalities of the popular decentralized exchange Uniswap, providing users with a seamless and efficient platform for swapping tokens, providing liquidity, and earning fees.
 
 UniClone leverages smart contracts and blockchain technology to enable trustless and permissionless token swaps directly from users' wallets. By replicating Uniswap's automated market maker (AMM) mechanism, our clone ensures liquidity for all listed tokens and allows users to trade without the need for traditional order books or centralized intermediaries.
-
-## Project Overview
-
-![alt text](https://www.daulathussain.com/wp-content/uploads/2023/04/Uniswap-clone.jpg)
 
 ## Technology used in the Application
 
@@ -173,23 +169,4 @@ const decimals1 = 18;
 <br/>
 const address1 = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
 
-# Project demo video
 
-## DEX Project:
-
-### Swap:
-
-![alt text](./assets/review/swap.png)
-
-### List:
-
-![alt text](./assets/review/list.png)
-
-### Pool:
-
-![alt text](./assets/review/pool1.png)
-![alt text](./assets/review/pool2.png)
-
-### Swap Token:
-
-![Genesis Project](./assets/review//review.gif)
