@@ -1,7 +1,7 @@
 // Token address
-shoaibAddress = "0x5aA185fbEFc205072FaecC6B9D564383e761f8C2";
-rayyanAddress = "0x63275D081C4A77AE69f76c4952F9747a5559a519";
-popupAddress = "0x5A61c51C6745b3F509f4a1BF54BFD04e04aF430a";
+shoaibAddress= '0x162700d1613DfEC978032A909DE02643bC55df1A';
+rayyanAddress= '0x67aD6EA566BA6B0fC52e97Bc25CE46120fdAc04c';
+popupAddress= '0x114e375B6FCC6d6fCb68c7A1d407E652C54F25FB';
 
 // Uniswap contract address
 // wethAddress = "0x6B763F54D260aFF608CbbAeD8721c96992eC24Db";
@@ -10,12 +10,12 @@ popupAddress = "0x5A61c51C6745b3F509f4a1BF54BFD04e04aF430a";
 // nftDescriptorAddress = "0xA5c9020ea95324a05B48491FB3e61Ba111E5dd95";
 // positionDescriptorAddress = "0x093D305366218D6d09bA10448922F10814b031dd";
 // positionManagerAddress = "0x061FB3749C4eD5e3c2d28a284940093cfDFcBa20";
-wethAddress = "0x012D720e7d2E84b24b68989e0f4aD824fE5B294C";
-factoryAddress = "0xA4f9885550548c6a45b9D18C57B114c06f3c39B8";
-swapRouterAddress = "0x886a2A3ABF5B79AA5dFF1C73016BD07CFc817e04";
-nftDescriptorAddress = "0x449C286Ab90639fd9F6604F4f15Ec86bce2b8A61";
-positionDescriptorAddress = "0x5E0399B4C3c4C31036DcA08d53c0c5b5c29C113e";
-positionManagerAddress = "0x512a0E8bAeb6Ac3D52A11780c92517627005b0b1";
+wethAddress = "0xc9952Fc93Fa9bE383ccB39008c786b9f94eAc95d";
+factoryAddress = "0xDde063eBe8E85D666AD99f731B4Dbf8C98F29708";
+swapRouterAddress = "0xD5724171C2b7f0AA717a324626050BD05767e2C6";
+nftDescriptorAddress= "0x70eE76691Bdd9696552AF8d4fd634b3cF79DD529";
+positionDescriptorAddress= "0x8B190573374637f144AC8D37375d97fd84cBD3a0";
+positionManagerAddress= "0x9385556B571ab92bf6dC9a0DbD75429Dd4d56F91";
 
 const artifacts = {
   UniswapV3Factory: require("@uniswap/v3-core/artifacts/contracts/UniswapV3Factory.sol/UniswapV3Factory.json"),
@@ -27,7 +27,7 @@ const bn = require("bignumber.js");
 bn.config({ EXPONENTIAL_AT: 999999, DECIMAL_PLACES: 40 });
 
 const MAINNET_URL =
-  "https://eth-mainnet.g.alchemy.com/v2/XbTCI1sk-nWg_2lJu90LU9FjQS6I94qj";
+  "https://eth-mainnet.g.alchemy.com/v2/A1QqJNUZQPujsSLrSHnkIqwlzi1fJb5Z";
 
 const provider = new ethers.providers.JsonRpcProvider(MAINNET_URL);
 

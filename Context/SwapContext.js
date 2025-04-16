@@ -329,8 +329,9 @@ console.log("DAI contract:", dai);
       // Check resulting DAI balance
       const daiBalance = await dai.balanceOf(account);
       const daiAmount = ethers.utils.formatUnits(daiBalance, 18);
-      console.log("New DAI Balance:", daiAmount);
+      
       setDai(daiAmount);
+      console.log("New DAI Balance:", daiAmount);
   
       return { success: true, txHash: receipt.transactionHash };
   
