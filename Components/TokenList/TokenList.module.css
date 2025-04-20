@@ -14,7 +14,7 @@
   padding: 0.2rem 1rem;
   font-weight: 900;
   line-height: 0;
-  color: #cff80b;
+  color: #58b6c6;
   font-size: 0.8rem;
   border-radius: 0.5rem;
 }
@@ -42,12 +42,12 @@
 
 .TokenList_box_info p span {
   font-weight: 900;
-  color: #cff80b;
+  color: #58b6c6;
   margin-right: 0.5rem;
 }
 
 .TokenList_box_info_symbol {
-  background-color: #cff80b;
+  background-color: #58b6c6;
   padding: 0.5rem;
   border-radius: 0.5rem;
   color: #1e1e1e;

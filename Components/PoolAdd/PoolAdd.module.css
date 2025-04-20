@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: #cff80b;
+  color: #58b6c6;
   cursor: pointer;
 }
 
@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  background-color: #cff80b;
+  background-color: #58b6c6;
   border-radius: 0.5rem;
   color: #1e1e1e;
   padding: 0 2rem;
@@ -49,7 +49,7 @@
   line-height: 0;
   padding: 0.5rem 1rem;
   justify-content: space-between;
-  border: 1px solid #cff80b;
+  border: 1px solid #58b6c6;
   margin-top: 1rem;
   border-radius: 0.5rem;
 }
@@ -64,7 +64,7 @@
 }
 
 .PoolAdd_box_price_left_fee button {
-  background-color: #cff80b;
+  background-color: #58b6c6;
   color: #1e1e1e;
   border: 0;
   padding: 0.5rem 1rem;
@@ -81,7 +81,7 @@
 }
 
 .PoolAdd_box_price_left_list_item {
-  border: 1px solid #cff80b;
+  border: 1px solid #58b6c6;
   padding: 0.5rem;
   line-height: 0.8;
   border-radius: 0.5rem;
@@ -95,7 +95,7 @@
 }
 
 .PoolAdd_box_price_left_list_item_para {
-  background-color: #cff80b;
+  background-color: #58b6c6;
   color: #1e1e1e;
   border-radius: 0.5rem;
   padding: 0.3rem;
@@ -106,7 +106,7 @@
   align-items: center;
   justify-content: space-between;
   line-height: 0;
-  border: 1px solid #cff80b;
+  border: 1px solid #58b6c6;
   border-radius: 0.5rem;
   margin-top: 1rem;
 }
@@ -116,13 +116,13 @@
   background-color: transparent;
   outline: none;
   border: none;
-  color: #cff80b;
+  color: #58b6c6;
   font-size: 1.5rem;
   margin-left: 2rem;
 }
 
 .PoolAdd_box_deposit_box_input {
-  background-color: #cff80b;
+  background-color: #58b6c6;
   padding: 0 1rem;
   border-radius: 0.5rem;
   color: #1e1e1e;
@@ -137,7 +137,7 @@
 
 .PoolAdd_box_deposit_box_input p small {
   background-color: #1e1e1e;
-  color: #cff80b;
+  color: #58b6c6;
   padding: 1rem;
   border-radius: 0.5rem;
   font-size: 0.5rem;
@@ -168,14 +168,14 @@
 
 .PoolAdd_box_price_right_range_box {
   border-radius: 0.5rem;
-  border: 1px solid #cff80b;
+  border: 1px solid #58b6c6;
   text-align: center;
   line-height: 1;
 }
 
 .PoolAdd_box_price_right_range_box_para small {
   margin-inline: 1rem;
-  background-color: #cff80b;
+  background-color: #58b6c6;
   font-size: 1.2rem;
   color: #1e1e1e;
   padding: 0.2rem 0.5rem;
@@ -190,7 +190,7 @@
 }
 
 .PoolAdd_box_price_right_button button {
-  background-color: #cff80b;
+  background-color: #58b6c6;
   color: #1e1e1e;
   border: 0;
   outline: none;
@@ -201,7 +201,7 @@
 }
 
 .PoolAdd_box_price_right_amount button {
-  background-color: #cff80b;
+  background-color: #58b6c6;
   color: #1e1e1e;
   border: 0;
   outline: none;
@@ -219,12 +219,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #cff80b;
+  border: 1px solid #58b6c6;
   border-radius: 0.5rem;
 }
 
 .PoolAdd_box_price_right_range_box_para {
-  background-color: #cff80b;
+  background-color: #58b6c6;
   border: 0;
   outline: 0;
   width: 80%;
@@ -244,7 +244,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    background-color: #cff80b;
+    background-color: #58b6c6;
     border-radius: 0.5rem;
     color: #1e1e1e;
     padding: 0 0.5rem;
@@ -256,6 +256,6 @@
     background-color: #1e1e1e;
     inset: 0% 0% 50% 0%;
     display: flex;
-    border: 1px solid #cff80b;
+    border: 1px solid #58b6c6;
   }
 }

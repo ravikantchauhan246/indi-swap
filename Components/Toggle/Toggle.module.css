@@ -44,14 +44,14 @@
 .Toggle_inner:before {
   content: "Yes";
   padding-left: 10px;
-  background-color: #cff80b;
+  background-color: #58b6c6;
   color: #1e1e1e;
 }
 
 .Toggle_inner:after {
   content: "No";
   padding-right: 10px;
-  background-color: #cff80b;
+  background-color: #58b6c6;
   color: #1e1e1e;
   text-align: right;
 }
