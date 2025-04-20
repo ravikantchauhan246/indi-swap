@@ -1,67 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import Style from "../styles/Tokens.module.css";
 import images from "../assets";
 import { AllTokens } from "../Components/index";
+import { SwapTokenContext } from "../Context/SwapContext";
 
 const Tokens = () => {
-  const [allTokenList, setAllTokenList] = useState([
-    {
-      number: 1,
-      image: images.etherlogo,
-      name: "Ether1",
-      symbol: "ETH1",
-      price: "$12,345",
-      change: "+ 234.5",
-      tvl: "$7894.5 M",
-      volume: "$716.5 M",
-    },
-    {
-      number: 2,
-      image: images.etherlogo,
-      name: "Ether2",
-      symbol: "ETH2",
-      price: "$12,345",
-      change: "+ 234.5",
-      tvl: "$7894.5 M",
-      volume: "$716.5 M",
-    },
-    {
-      number: 3,
-      image: images.etherlogo,
-      name: "Ether3",
-      symbol: "ETH3",
-      price: "$12,345",
-      change: "+ 234.5",
-      tvl: "$7894.5 M",
-      volume: "$716.5 M",
-    },
-    {
-      number: 4,
-      image: images.etherlogo,
-      name: "Ether4",
-      symbol: "ETH4",
-      price: "$12,345",
-      change: "+ 234.5",
-      tvl: "$7894.5 M",
-      volume: "$716.5 M",
-    },
-  ]);
-
-  const [coppyAllTokenList, setCoppyAllTokenList] = useState(allTokenList);
+  const { topTokenList, isLoadingTokens } = useContext(SwapTokenContext);
+  const [allTokenList, setAllTokenList] = useState([]);
+  const [coppyAllTokenList, setCoppyAllTokenList] = useState([]);
   const [search, setSearch] = useState("");
   const [searchItem, setSearchItem] = useState(search);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (topTokenList.length > 0) {
+      setAllTokenList(topTokenList);
+      setCoppyAllTokenList(topTokenList);
+    }
+  }, [topTokenList]);
 
   const onHandleSearch = (value) => {
-    const fillteredTokens = allTokenList.filter(({ name }) =>
-      name.toLowerCase().includes(value.toLowerCase())
+    const filteredTokens = coppyAllTokenList.filter(
+      ({ name, symbol }) => 
+        name.toLowerCase().includes(value.toLowerCase()) || 
+        symbol.toLowerCase().includes(value.toLowerCase())
     );
 
-    if (fillteredTokens.length === 0) {
+    if (filteredTokens.length === 0) {
       setAllTokenList(coppyAllTokenList);
     } else {
-      setAllTokenList(fillteredTokens);
+      setAllTokenList(filteredTokens);
     }
   };
 
@@ -71,9 +42,12 @@ const Tokens = () => {
     }
   };
 
+  const handleTokenClick = (tokenId) => {
+    router.push(`/token/${tokenId}`);
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setSearch(searchItem), 1000);
-
     return () => clearTimeout(timer);
   }, [searchItem]);
 
@@ -94,7 +68,7 @@ const Tokens = () => {
             <p>
               <Image
                 src={images.etherlogo}
-                alt="etehr"
+                alt="ether"
                 width={20}
                 height={20}
               />
@@ -107,14 +81,24 @@ const Tokens = () => {
             </p>
             <input
               type="text"
-              placeholder="Filter tokes"
+              placeholder="Filter tokens"
               onChange={(e) => setSearchItem(e.target.value)}
               value={searchItem}
             />
           </div>
         </div>
 
-        <AllTokens allTokenList={allTokenList} />
+        {isLoadingTokens ? (
+          <div className={Style.Tokens_loading}>
+            <Image src={images.loading} alt="Loading..." width={100} height={100} />
+            <p>Loading token data...</p>
+          </div>
+        ) : (
+          <AllTokens 
+            allTokenList={allTokenList} 
+            handleTokenClick={handleTokenClick}
+          />
+        )}
       </div>
     </div>
   );

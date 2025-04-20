@@ -3,27 +3,35 @@
   background-color: #1e1e1e;
   border: 1px solid #d1f80b53;
   border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.AllTokens_box_header,
+.AllTokens_box_list {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 3fr 2fr 2fr 2fr 2fr;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  gap: 1rem;
 }
 
 .AllTokens_box_header {
-  display: grid;
-  grid-template-columns: 0.5fr 4fr 2fr 2fr 2fr 2fr;
-  align-items: center;
-  padding: 0.5rem 1rem;
+  cursor: auto;
+  padding: 0 0.5rem;
   border-bottom: 1px solid #d1f80b53;
 }
 
-.AllTokens_box_header p {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.AllTokens_box_header p,
+.AllTokens_box_list p {
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.8;
 }
 
 .AllTokens_box_list {
-  display: grid;
-  grid-template-columns: 0.5fr 4fr 2fr 2fr 2fr 2fr;
-  align-items: center;
-  padding: 0.5rem 1rem;
+  transition: all 0.3s ease-in;
+  border-radius: 0.5rem;
   margin-top: -0.5rem;
 }
 
@@ -35,9 +43,18 @@
   align-items: center;
 }
 
+.AllTokens_box_list_para small {
+  font-weight: 700;
+}
+
+.hide {
+  padding-left: 0.5rem;
+}
+
 @media only screen and (max-width: 35em) {
   .AllTokens_box_list {
-    grid-template-columns: 3.5fr 1fr;
+    grid-template-columns: 2fr 1fr;
+    margin-top: 0.5rem;
   }
 
   .hide {
@@ -45,7 +62,7 @@
   }
 
   .AllTokens_box_header {
-    grid-template-columns: 3.5fr 1fr;
+    grid-template-columns: 3fr 1fr;
   }
 
   .AllTokens_box_header .hide {
@@ -55,4 +72,43 @@
   .AllTokens_box_list_para {
     font-size: 1.1rem;
   }
+}
+
+/* New styles added */
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  background-color: rgba(59, 59, 59, 0.1);
+}
+
+.positive {
+  color: #16c784;
+}
+
+.negative {
+  color: #ea3943;
+}
+
+.tokenImageContainer {
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tokenImage {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Loading styles */
+.Tokens_loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }

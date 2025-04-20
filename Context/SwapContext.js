@@ -40,6 +40,8 @@ export const SwapTokenContextProvider = ({ children }) => {
   const [getAllLiquidity, setGetAllLiquidity] = useState([]);
 
   const [topTokenList, setTopTokenList] = useState([]);
+  const [tokenPriceHistory, setTokenPriceHistory] = useState({});
+  const [isLoadingTokens, setIsLoadingTokens] = useState(false);
 
   const addToken = [
     "0xdccF554708B72d0fe9500cBfc1595cDBE3d66e5a",
@@ -58,6 +60,7 @@ export const SwapTokenContextProvider = ({ children }) => {
 
   const fetchingData = async () => {
     try {
+      setIsLoadingTokens(true);
       //Get user account
       const userAccount = await checkIfWalletConnected();
       setAccount(userAccount);
@@ -96,55 +99,86 @@ export const SwapTokenContextProvider = ({ children }) => {
           tokenBalance: convertTokenBal,
           tokenAddress: el,
         });
-
-        //console.log(tokenData);
       });
 
-      //Get Liquidity
-      // const userStorageData = await connecttingWithUserStorageContract();
-      // const userLiquidity = await userStorageData.getAllTransactions();
-      // console.log(userLiquidity);
+      // For token analytics, we'll use CoinGecko API as it's free and reliable
+      try {
+        // Get top tokens from CoinGecko
+        const topTokensResponse = await axios.get(
+          'https://api.coingecko.com/api/v3/coins/markets',
+          {
+            params: {
+              vs_currency: 'usd',
+              order: 'market_cap_desc',
+              per_page: 20,
+              page: 1,
+              sparkline: false
+            }
+          }
+        );
+        
+        // Format the token data to match our application's structure
+        const formattedTokens = topTokensResponse.data.map((token, index) => ({
+          id: token.id,
+          name: token.name,
+          symbol: token.symbol.toUpperCase(),
+          image: token.image,
+          price: `$${token.current_price.toLocaleString()}`,
+          change: `${token.price_change_percentage_24h.toFixed(2)}%`,
+          tvl: `$${(token.market_cap / 1000000).toFixed(1)} M`,
+          volume: `$${(token.total_volume / 1000000).toFixed(1)} M`,
+          number: index + 1,
+          marketCap: token.market_cap,
+          priceData: null // We'll populate this later for individual tokens
+        }));
 
-      // userLiquidity.map(async (el, i) => {
-      //   const liquidityData = await getLiquidityData(
-      //     el.poolAddress,
-      //     el.tokenAddress0,
-      //     el.tokenAddress1
-      //   );
-
-      //   getAllLiquidity.push(liquidityData);
-      //   console.log("getAllLiquidity", getAllLiquidity);
-      // });
-
-      // const URL = "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3";
-
-      const URL =
-        "https://gateway.thegraph.com/api/{api-key}/subgraphs/id/5zvR82QoaXYFyDEKLZ9t6v9adgnptxYpKpSbxtgVENFV";
-
-      const query = `{
-      tokens(orderBy: volumeUSD, orderDirection: desc, first: 20) {
-      id
-      name
-      symbol
-      decimals
-      volume
-      volumeUSD
-      totalSupply
-      feesUSD
-      txCount
-      poolCount
-      totalValueLockedUSD
-      totalValueLocked
-      derivedETH
+        setTopTokenList(formattedTokens);
+      } catch (error) {
+        console.error("Error fetching token data from CoinGecko:", error);
       }
-    }`;
-
-      const axiosData = await axios.post(URL, { query: query });
-      // console.log("axiosData.data.data.tokens", axiosData.data.data.tokens);
-
-      // setTopTokenList(axiosData.data.data.tokens);
+      
+      setIsLoadingTokens(false);
     } catch (error) {
       console.log(error);
+      setIsLoadingTokens(false);
+    }
+  };
+
+  // New function to fetch price history for a specific token
+  const fetchTokenPriceHistory = async (tokenId) => {
+    try {
+      // Check if we already have the data cached
+      if (tokenPriceHistory[tokenId]) {
+        return tokenPriceHistory[tokenId];
+      }
+
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${tokenId}/market_chart`,
+        {
+          params: {
+            vs_currency: 'usd',
+            days: 14,
+            interval: 'daily'
+          }
+        }
+      );
+
+      // Process the price data for chart display
+      const priceData = response.data.prices.map(item => ({
+        timestamp: item[0],
+        price: item[1]
+      }));
+
+      // Cache the data
+      setTokenPriceHistory(prev => ({
+        ...prev,
+        [tokenId]: priceData
+      }));
+
+      return priceData;
+    } catch (error) {
+      console.error(`Error fetching price history for ${tokenId}:`, error);
+      return [];
     }
   };
 
@@ -188,87 +222,12 @@ export const SwapTokenContextProvider = ({ children }) => {
       );
       const poolAddress = createPool;
       console.log("poolAddress", poolAddress);
-
-      //Create liquidity
-      // const info = await addLiquidityExtrenal(
-      //   tokenAddress0,
-      //   tokenAddress1,
-      //   poolAddress,
-      //   fee,
-      //   tokenAmmount0,
-      //   tokenAmmount1
-      // );
-      // // console.log("info", info);
-
-      // //Add data
-      // const userStorageData = await connecttingWithUserStorageContract();
-      // // console.log("userStorageData", userStorageData);
-
-      // const userLiquidity = await userStorageData.addToBockchain(
-      //   poolAddress,
-      //   tokenAddress0,
-      //   tokenAddress1
-      // );
-      // console.log("userLiquidity", userLiquidity);
     } catch (error) {
       console.log(error);
     }
   };
 
-  //Single Swap Token
-  // const singleSwapToken = async ({ token1, token2, swapAmount }) => {
-  //   console.log("token1.tokenAddress", token1.tokenAddress);
-  //   console.log("token2.tokenAddress", token2.tokenAddress);
-  //   console.log("swapAmount", swapAmount);
-  //   try {
-  //     let singleSwapToken;
-  //     let weth;
-  //     let dai;
-
-  //     singleSwapToken = await connecttingWithSingleSwapToken();
-  //     weth = await connecttingWithIWETHToken();
-  //     dai = await connecttingWithDAIToken();
-     
-  //     const decimals0 = 18;
-  //     const inputAmount = swapAmount;
-  //     const amountIn = ethers.utils.parseUnits(
-  //       inputAmount.toString(),
-  //       decimals0
-  //     );
-
-  //     console.log("amountIn", amountIn);
-
-  //     await weth.deposit({ value: amountIn.toString() });
-
-  //     await weth.approve(singleSwapToken.address, amountIn);
-
-  //     //Swap
-  //     const transaction = await singleSwapToken.swapExactInputString(
-  //       token1.tokenAddress,
-  //       token2.tokenAddress,
-  //       amountIn,
-  //       {
-  //         gasLimit: 300000,
-  //       }
-  //     );
-
-  //     await transaction.wait();
-  //     console.log(transaction);
-
-  //     const balance = await dai.balanceOf(account);
-  //     const transferAmount = BigNumber.from(balance).toString();
-  //     const ethValue = ethers.utils.formatEther(transferAmount);
-  //     console.log("Value",ethValue);
-  //     setDai(ethValue);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-
-  //deepseek
-
-  const singleSwapToken = async ({token1,token2,swapAmount }) => {
+  const singleSwapToken = async ({ token1, token2, swapAmount }) => {
     try {
       // Validate inputs
       if (!token1 || !token2 || !token1.tokenAddress || !token2.tokenAddress) {
@@ -288,9 +247,8 @@ export const SwapTokenContextProvider = ({ children }) => {
       const weth = await connecttingWithIWETHToken();
       const dai = await connecttingWithDAIToken();
       console.log("SingleSwapToken contract:", singleSwapToken);
-console.log("WETH contract:", weth);
-console.log("DAI contract:", dai);
-
+      console.log("WETH contract:", weth);
+      console.log("DAI contract:", dai);
   
       // Convert amount with proper decimals (assuming 18 decimals for WETH)
       const decimals = 18;
@@ -344,39 +302,9 @@ console.log("DAI contract:", dai);
     }
   };
 
-
-
   useEffect(() => {
     singleSwapToken();
   }, []);
-  
-
-  // async function checkWalletAndBalance() {
-  //   if (typeof window.ethereum !== 'undefined') {
-  //       const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //       const signer = provider.getSigner();
-  //       const walletAddress = await signer.getAddress();
-
-  //       console.log("Connected wallet address:", walletAddress);
-
-  //       const contract = new ethers.Contract(contractAddress, contractABI, signer);
-
-  //       try {
-  //           const balance = await contract.balanceOf(walletAddress);
-  //           console.log("Balance:", balance.toString());
-
-  //           // Example of fetching another piece of data
-  //           const totalSupply = await contract.totalSupply();
-  //           console.log("Total Supply:", totalSupply.toString());
-  //       } catch (error) {
-  //           console.error("Error fetching data:", error);
-  //       }
-  //   } else {
-  //       console.error("Wallet not connected");
-  //   }
-  // }
-
-  // checkWalletAndBalance();
 
   return (
     <SwapTokenContext.Provider
@@ -393,6 +321,9 @@ console.log("DAI contract:", dai);
         weth9,
         dai,
         tokenData,
+        topTokenList,
+        fetchTokenPriceHistory,
+        isLoadingTokens,
       }}
     >
       {children}
