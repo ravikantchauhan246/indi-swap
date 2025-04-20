@@ -1,13 +1,15 @@
-import React from "react";
-import { NavBar } from "../Components/index";
+import React, { useContext } from "react";
 import { HeroSection } from "../Components/index";
+import { SwapTokenContext } from "../Context/SwapContext";
 
-const index = () => {
+const Home = () => {
+  const { tokenData, account } = useContext(SwapTokenContext);
+
   return (
     <div>
-      <HeroSection account="hey" tokenData="DATA" />
+      <HeroSection />
     </div>
   );
 };
 
-export default index;
+export default Home;

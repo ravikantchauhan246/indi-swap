@@ -46,6 +46,12 @@ const Tokens = () => {
     router.push(`/token/${tokenId}`);
   };
 
+  const clearSearch = () => {
+    setSearchItem("");
+    setSearch("");
+    onClearSearch();
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setSearch(searchItem), 1000);
     return () => clearTimeout(timer);
@@ -62,29 +68,28 @@ const Tokens = () => {
   return (
     <div className={Style.Tokens}>
       <div className={Style.Tokens_box}>
-        <h2>Top tokens on IndiSwap</h2>
-        <div className={Style.Tokens_box_header}>
-          <div className={Style.Tokens_box_ethereum}>
-            <p>
-              <Image
-                src={images.etherlogo}
-                alt="ether"
-                width={20}
-                height={20}
-              />
-            </p>
-            <p>Ethereum</p>
-          </div>
+        <div className={Style.Tokens_box_title}>
+          <h2>Top tokens on IndiSwap</h2>
+          <p className={Style.Tokens_box_subtitle}>The most popular tokens in the IndiSwap ecosystem</p>
+        </div>
+        
+        <div className={Style.Tokens_box_search_container}>
           <div className={Style.Tokens_box_search}>
-            <p>
-              <Image src={images.search} alt="image" width={20} height={20} />
-            </p>
+            <div className={Style.Tokens_box_search_icon}>
+              <Image src={images.search} alt="search" width={20} height={20} />
+            </div>
             <input
               type="text"
-              placeholder="Filter tokens"
+              placeholder="Search tokens by name or symbol"
               onChange={(e) => setSearchItem(e.target.value)}
               value={searchItem}
+              className={Style.Tokens_box_search_input}
             />
+            {searchItem && (
+              <div className={Style.Tokens_box_search_clear} onClick={clearSearch}>
+                <Image src={images.close} alt="clear" width={15} height={15} />
+              </div>
+            )}
           </div>
         </div>
 

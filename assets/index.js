@@ -1,4 +1,4 @@
-import uniswap from "./uniswap.png";
+import indiswap from "./indiswap.png";
 import search from "./Search.png";
 import ether from "./ether.png";
 import arrow from "./arrow.png";
@@ -15,7 +15,7 @@ import tick from "./tick.png";
 import loading from "./loading.gif";
 
 export default {
-  uniswap,
+  uniswap: indiswap, // Use indiswap image but keep the key as uniswap to avoid breaking changes
   search,
   ether,
   arrow,

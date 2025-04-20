@@ -3,53 +3,94 @@
 }
 
 .Tokens_box {
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
+}
+
+.Tokens_box_title {
+  margin-bottom: 1.5rem;
 }
 
 .Tokens_box h2 {
   font-size: 2rem;
-  font-weight: 400;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-.Tokens_box_header {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+.Tokens_box_subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0;
 }
 
-.Tokens_box_ethereum {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-  background-color: #1e1e1e;
-  padding: 0rem 2rem;
-  line-height: 0;
-  border-radius: 0.5rem;
-  color: #cff80b;
-  border: 1px solid #d1f80b53;
+.Tokens_box_search_container {
+  margin-bottom: 1.5rem;
 }
 
 .Tokens_box_search {
   display: flex;
   align-items: center;
-  gap: 1rem;
   background-color: #1e1e1e;
-  padding: 0.2rem 2rem;
-  line-height: 0;
-  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.8rem;
   width: 100%;
   border: 1px solid #d1f80b53;
+  transition: all 0.3s ease;
 }
 
-.Tokens_box_search input {
+.Tokens_box_search:focus-within {
+  border-color: #d1f80b;
+  box-shadow: 0 0 0 1px rgba(209, 248, 11, 0.3);
+}
+
+.Tokens_box_search_icon {
+  margin-right: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Tokens_box_search_input {
   background-color: transparent;
   outline: none;
   border: 0;
   color: #cff80b;
-  width: 90%;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.Tokens_box_search_clear {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem;
+  border-radius: 50%;
+}
+
+.Tokens_box_search_clear:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Loading styles */
+.Tokens_loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background-color: #1e1e1e;
+  border-radius: 0.8rem;
+  border: 1px solid #d1f80b53;
+}
+
+.Tokens_loading p {
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
 }
 
 @media only screen and (max-width: 35em) {
@@ -58,17 +99,11 @@
     margin: 0 auto;
   }
 
-  .Tokens_box_header {
-    display: grid;
-  }
-
-  .Tokens_box_search {
-    padding: 0.5rem 2rem;
-    width: 85%;
-  }
-
   .Tokens_box h2 {
     font-size: 1.5rem;
-    font-weight: 400;
+  }
+  
+  .Tokens_box_subtitle {
+    font-size: 0.9rem;
   }
 }
