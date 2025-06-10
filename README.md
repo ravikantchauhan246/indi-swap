@@ -1,6 +1,6 @@
 # Building and Deploying a IndiSwap Exchange Clone for DeFi
 
-Enter the world of decentralized finance (DeFi) with our IndiSwap. This project focuses on replicating the functionalities of the popular decentralized exchange Uniswap, providing users with a seamless and efficient platform for swapping tokens, providing liquidity, and earning fees.
+Enter the world of decentralized finance (DeFi) with our IndiSwap.This project changes the view of traditional trading with new decentralized trading option.This project focuses on replicating the functionalities of the popular decentralized exchange Uniswap, providing users with a seamless and efficient platform for swapping tokens, providing liquidity, and earning fees.
 
 IndiSwap leverages smart contracts and blockchain technology to enable trustless and permissionless token swaps directly from users' wallets. By replicating Uniswap's automated market maker (AMM) mechanism, our clone ensures liquidity for all listed tokens and allows users to trade without the need for traditional order books or centralized intermediaries.
 
